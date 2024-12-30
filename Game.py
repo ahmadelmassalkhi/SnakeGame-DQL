@@ -13,12 +13,19 @@ class Game:
         self.fps = fps
         self.clock = pygame.time.Clock()
         self.running = True
+        self.width, self.height = width, height
 
         # game objects
         self.map = Map(width, height)
         self.snake = Snake(map=self.map)
         self.apple = Apple(map=self.map)
+        self.reset()
 
+    def reset(self):
+        self.map = Map(self.width, self.height)
+        self.snake = Snake(map=self.map)
+        self.apple = Apple(map=self.map)
+        self.apple.relocate()
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
@@ -37,7 +44,7 @@ class Game:
             self.snake.grow()
             self.apple.relocate()
         if self.snake.check_collision():
-            self.running = False
+            self.reset()
 
     def draw(self):
         self.map.screen.fill((0, 0, 0))
