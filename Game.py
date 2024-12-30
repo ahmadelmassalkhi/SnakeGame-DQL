@@ -52,7 +52,6 @@ class Game:
             self.apple.relocate()
 
     def draw(self):
-        self.map.screen.fill((0, 0, 0))
         self.map.draw()
         self.snake.draw()
         self.apple.draw()

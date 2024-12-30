@@ -8,7 +8,8 @@ class Map:
         self.screen = pygame.display.set_mode((self.width * TILE_SIZE, self.height * TILE_SIZE))
         pygame.display.set_caption("Snake Game")
 
-    def draw(self):
+    def draw(self, color=(0, 0, 0)):
+        self.screen.fill(color)
         for x in range(0, self.width * self.TILE_SIZE, self.TILE_SIZE):
             for y in range(0, self.height * self.TILE_SIZE, self.TILE_SIZE):
                 rect = pygame.Rect(x, y, self.TILE_SIZE, self.TILE_SIZE)
