@@ -8,17 +8,12 @@ pygame.init()
 
 
 class Game:
-    def __init__(self, width, height, fps=5):
+    def __init__(self, width, height, fps=10):
         # game settings
         self.fps = fps
         self.clock = pygame.time.Clock()
         self.running = True
         self.width, self.height = width, height
-
-        # game objects
-        self.map = Map(width, height)
-        self.snake = Snake(map=self.map)
-        self.apple = Apple(map=self.map)
         self.reset()
 
     def reset(self):
@@ -41,6 +36,8 @@ class Game:
 
     def update(self):
         self.snake.move()
+        self.snake.update_vision(self.apple)
+        
         ''' CHECK COLLISION '''
         if self.snake.check_collision():
             self.reset()
@@ -57,7 +54,6 @@ class Game:
         self.map.draw()
         self.snake.draw()
         self.apple.draw()
-        self.snake.update_vision(self.apple)
         pygame.display.flip()
 
     def run(self):

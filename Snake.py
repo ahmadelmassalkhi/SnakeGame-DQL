@@ -10,6 +10,7 @@ class Snake:
         self.map = map
         self.body = [(map.width//2, map.height//2)]
         self.direction = Snake.directions[1]  # Start moving to the right
+        self.vision_grid = [[0 for _ in range(self.map.width)] for _ in range(self.map.height)]
 
     def move(self):
         head = self.body[0]
@@ -52,5 +53,3 @@ class Snake:
         # Mark the apple
         apple_pos = apple.position
         self.vision_grid[apple_pos[1]][apple_pos[0]] = 3
-        
-        print(self.vision_grid)
