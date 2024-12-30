@@ -8,7 +8,7 @@ pygame.init()
 
 
 class Game:
-    def __init__(self, width, height, fps=10):
+    def __init__(self, width, height, fps=5):
         # game settings
         self.fps = fps
         self.clock = pygame.time.Clock()
@@ -57,6 +57,7 @@ class Game:
         self.map.draw()
         self.snake.draw()
         self.apple.draw()
+        self.snake.update_vision(self.apple)
         pygame.display.flip()
 
     def run(self):
