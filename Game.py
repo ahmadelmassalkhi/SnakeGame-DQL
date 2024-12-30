@@ -40,11 +40,16 @@ class Game:
 
     def update(self):
         self.snake.move()
+        ''' CHECK COLLISION '''
+        if self.snake.check_collision():
+            self.reset()
+
+        ''' EAT APPLE '''
+        # this logic must be AFTER the collision check
+        # or else, eating first apple results in self-collision (head in body) 
         if self.snake.body[0] == self.apple.position:
             self.snake.grow()
             self.apple.relocate()
-        if self.snake.check_collision():
-            self.reset()
 
     def draw(self):
         self.map.screen.fill((0, 0, 0))
