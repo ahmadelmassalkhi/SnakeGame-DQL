@@ -22,6 +22,7 @@ class Game:
         self.reset()
 
     def reset(self):
+        self.score = 0
         self.map = Map(self.width, self.height)
         self.snake = Snake(map=self.map)
         self.apple = Apple(map=self.map)
@@ -48,6 +49,7 @@ class Game:
         # this logic must be AFTER the collision check
         # or else, eating first apple results in self-collision (head in body) 
         if self.snake.body[0] == self.apple.position:
+            self.score += 1
             self.snake.grow()
             self.apple.relocate()
 
