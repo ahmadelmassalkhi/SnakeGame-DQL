@@ -6,7 +6,7 @@ from Map import Map
 class Snake:
     def __init__(self, map:Map):
         self.map = map
-        self.body = [(5, 5)]
+        self.body = [(map.width//2, map.height//2)]
         self.direction = (1, 0)  # Start moving to the right
 
     def move(self):
