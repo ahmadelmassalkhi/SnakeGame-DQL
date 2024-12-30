@@ -42,14 +42,18 @@ class Snake:
         # Init/Reset the grid
         self.vision_grid = [[0 for _ in range(self.map.width)] for _ in range(self.map.height)]
 
-        # Mark the snake's body
-        for segment in self.body[1:]:
-            self.vision_grid[segment[1]][segment[0]] = 1  # Body
+        try:
+            # Mark the snake's head
+            head = self.body[0]
+            self.vision_grid[head[1]][head[0]] = 2
 
-        # Mark the snake's head
-        head = self.body[0]
-        self.vision_grid[head[1]][head[0]] = 2
+            # Mark the snake's body
+            for segment in self.body[1:]:
+                self.vision_grid[segment[1]][segment[0]] = 1  # Body
 
-        # Mark the apple
-        apple_pos = apple.position
-        self.vision_grid[apple_pos[1]][apple_pos[0]] = 3
+            # Mark the apple
+            apple_pos = apple.position
+            self.vision_grid[apple_pos[1]][apple_pos[0]] = 3
+        except Exception as e:
+            # incase of collision, head position is an invalid index
+            pass
