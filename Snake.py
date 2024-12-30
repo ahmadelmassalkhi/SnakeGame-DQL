@@ -4,10 +4,12 @@ from Map import Map
 
 
 class Snake:
+    directions = [(0, -1), (1, 0), (0, 1), (-1, 0)] # up, right, down, left
+
     def __init__(self, map:Map):
         self.map = map
         self.body = [(map.width//2, map.height//2)]
-        self.direction = (1, 0)  # Start moving to the right
+        self.direction = Snake.directions[1]  # Start moving to the right
 
     def move(self):
         head = self.body[0]
