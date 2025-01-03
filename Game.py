@@ -11,9 +11,9 @@ class Game:
     def __init__(self, width, height, fps=10):
         # game settings
         self.fps = fps
+        self.width, self.height = width, height
         self.clock = pygame.time.Clock()
         self.running = True
-        self.width, self.height = width, height
         self.reset()
 
     def reset(self):
@@ -34,6 +34,12 @@ class Game:
         elif keys[pygame.K_RIGHT] and self.snake.direction != (-1, 0):
             self.snake.direction = (1, 0)
 
+    def draw(self):
+        self.map.draw()
+        self.snake.draw()
+        self.apple.draw()
+        pygame.display.flip()
+
     def update(self):
         self.snake.move()
         self.snake.update_vision(self.apple)
@@ -49,12 +55,6 @@ class Game:
             self.score += 1
             self.snake.grow()
             self.apple.relocate()
-
-    def draw(self):
-        self.map.draw()
-        self.snake.draw()
-        self.apple.draw()
-        pygame.display.flip()
 
     def run(self):
         while self.running:

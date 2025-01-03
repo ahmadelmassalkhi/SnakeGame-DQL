@@ -6,7 +6,7 @@ from Map import Map
 class Apple:
     def __init__(self, map:Map):
         self.map = map
-        self.position = (random.randint(0, map.width - 1), random.randint(0, map.height - 1))
+        self.relocate()
 
     def relocate(self):
         self.position = (random.randint(0, self.map.width - 1), random.randint(0, self.map.height - 1))

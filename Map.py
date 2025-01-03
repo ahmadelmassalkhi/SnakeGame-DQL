@@ -3,8 +3,7 @@ import pygame
 class Map:
     def __init__(self, width, height, TILE_SIZE=20):
         self.TILE_SIZE = TILE_SIZE
-        self.width = width
-        self.height = height
+        self.width, self.height = width, height
         self.screen = pygame.display.set_mode((self.width * TILE_SIZE, self.height * TILE_SIZE))
         pygame.display.set_caption("Snake Game")
 
