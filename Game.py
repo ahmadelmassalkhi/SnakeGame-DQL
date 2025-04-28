@@ -23,6 +23,12 @@ class Game:
         self.apple = Apple(map=self.map)
         self.apple.relocate()
 
+    def draw(self):
+        self.map.draw()
+        self.snake.draw()
+        self.apple.draw()
+        pygame.display.flip()
+
     def handle_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] and self.snake.direction != Snake.DIRECTIONS['DOWN']:
@@ -34,13 +40,8 @@ class Game:
         elif keys[pygame.K_RIGHT] and self.snake.direction != Snake.DIRECTIONS['LEFT']:
             self.snake.direction = Snake.DIRECTIONS['RIGHT']
 
-    def draw(self):
-        self.map.draw()
-        self.snake.draw()
-        self.apple.draw()
-        pygame.display.flip()
-
-    def update(self):
+    def step(self):
+        self.handle_input()
         self.snake.move()
         
         ''' CHECK COLLISION '''
@@ -60,8 +61,7 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-            self.handle_input()
-            self.update()
+            self.step() # update game state
             self.draw()
             self.clock.tick(self.fps)
         pygame.quit()
