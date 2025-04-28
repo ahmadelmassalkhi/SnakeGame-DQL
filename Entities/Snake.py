@@ -2,6 +2,7 @@ import pygame
 from .Map import Map
 import random
 from Enums.Direction import Direction
+from Enums.Tile import Tile
 
 class Snake:
 
@@ -14,7 +15,12 @@ class Snake:
         head = self.body[0]
         new_head = (head[0] + self.direction[0], head[1] + self.direction[1])
         self.body.insert(0, new_head)
-        self.body.pop()
+        tail = self.body.pop()
+
+        # Update map grid
+        self.map.grid[new_head] = Tile.SNAKE_HEAD.value # new head
+        self.map.grid[head] = Tile.SNAKE_BODY.value # is now a body segment
+        self.map.grid[tail] = Tile.EMPTY.value # is now empty
 
     def grow(self):
         self.body.append(self.body[-1])

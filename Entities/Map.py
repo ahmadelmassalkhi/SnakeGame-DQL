@@ -1,4 +1,5 @@
 import pygame
+from Enums.Tile import Tile
 
 class Map:
     def __init__(self, width, height, TILE_SIZE=20):
@@ -6,6 +7,7 @@ class Map:
         self.width, self.height = width, height
         self.screen = pygame.display.set_mode((self.width * TILE_SIZE, self.height * TILE_SIZE))
         pygame.display.set_caption("Snake Game")
+        self.grid = {(x, y): Tile.EMPTY for x in range(self.width) for y in range(self.height)}
 
     def draw(self, color=(0, 0, 0)):
         self.screen.fill(color)

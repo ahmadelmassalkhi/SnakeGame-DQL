@@ -1,7 +1,7 @@
 import pygame
 import random
-from .Map import Map
-
+from Entities.Map import Map
+from Enums.Tile import Tile
 
 class Apple:
     def __init__(self, map:Map):
@@ -9,7 +9,21 @@ class Apple:
         self.relocate()
 
     def relocate(self):
-        self.position = (random.randint(0, self.map.width - 1), random.randint(0, self.map.height - 1))
+        '''
+            Relocates the apple to a random empty tile on the map.
+        '''
+        # Ensure the apple does not spawn on the snake
+        empty_tiles = [tile for tile in self.map.grid if self.map.grid[tile] == Tile.EMPTY.value]
+        if not empty_tiles:
+            return False  # No empty tiles available
+        
+        # Randomly select an empty tile
+        self.position = random.choice(empty_tiles) 
+        # Mark the tile as occupied by an apple
+        self.map.grid[self.position] = Tile.APPLE.value
+
+        # Found and Occupied an empty tile
+        return True
 
     def draw(self):
         rect = pygame.Rect(self.position[0] * self.map.TILE_SIZE, self.position[1] * self.map.TILE_SIZE, self.map.TILE_SIZE, self.map.TILE_SIZE)
