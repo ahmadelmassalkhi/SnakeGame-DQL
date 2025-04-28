@@ -33,17 +33,17 @@ class Game:
     def handle_input(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] and self.snake.direction != Direction.DOWN.value:
-            self.snake.direction = Direction.UP.value
-        elif keys[pygame.K_DOWN] and self.snake.direction != Direction.UP.value:
-            self.snake.direction = Direction.DOWN.value
-        elif keys[pygame.K_LEFT] and self.snake.direction != Direction.RIGHT.value:
-            self.snake.direction = Direction.LEFT.value
-        elif keys[pygame.K_RIGHT] and self.snake.direction != Direction.LEFT.value:
-            self.snake.direction = Direction.RIGHT.value
+            return Direction.UP.value
+        if keys[pygame.K_DOWN] and self.snake.direction != Direction.UP.value:
+            return Direction.DOWN.value
+        if keys[pygame.K_LEFT] and self.snake.direction != Direction.RIGHT.value:
+            return Direction.LEFT.value
+        if keys[pygame.K_RIGHT] and self.snake.direction != Direction.LEFT.value:
+            return Direction.RIGHT.value
+        return None
 
     def step(self):
-        self.handle_input()
-        self.snake.move()
+        self.snake.move(self.handle_input())
         
         ''' CHECK COLLISION '''
         if self.snake.check_collision():

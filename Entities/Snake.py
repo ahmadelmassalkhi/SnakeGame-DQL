@@ -11,7 +11,9 @@ class Snake:
         self.body = [(map.width//2, map.height//2)]
         self.direction = random.choice(list(Direction)).value
 
-    def move(self):
+    def move(self, direction:tuple[int, int] = None):
+        if direction:
+            self.direction = direction
         head = self.body[0]
         new_head = (head[0] + self.direction[0], head[1] + self.direction[1])
         self.body.insert(0, new_head)
