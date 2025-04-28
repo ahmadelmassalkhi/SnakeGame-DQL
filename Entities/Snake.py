@@ -1,20 +1,14 @@
 import pygame
-from Map import Map
+from .Map import Map
 import random
+from Enums.Direction import Direction
 
 class Snake:
-    DIRECTIONS = {
-            'UP': (0, -1),
-            'DOWN': (0, 1),
-            'LEFT': (-1, 0),
-            'RIGHT': (1, 0)
-        }
 
     def __init__(self, map:Map):
         self.map = map
         self.body = [(map.width//2, map.height//2)]
-        self.direction = random.choice(list(Snake.DIRECTIONS.values()))  # Start moving in a random direction
-        self.vision_grid = [[0 for _ in range(self.map.width)] for _ in range(self.map.height)]
+        self.direction = random.choice(list(Direction)).value
 
     def move(self):
         head = self.body[0]

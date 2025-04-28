@@ -1,6 +1,6 @@
 import pygame
 import random
-from Map import Map
+from .Map import Map
 
 
 class Apple:

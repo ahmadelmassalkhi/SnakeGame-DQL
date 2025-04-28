@@ -1,7 +1,8 @@
 import pygame
-from Map import Map
-from Snake import Snake
-from Apple import Apple
+from Entities.Map import Map
+from Entities.Snake import Snake
+from Entities.Apple import Apple
+from Enums.Direction import Direction
 
 # Initialize Pygame
 pygame.init()
@@ -31,14 +32,14 @@ class Game:
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP] and self.snake.direction != Snake.DIRECTIONS['DOWN']:
-            self.snake.direction = Snake.DIRECTIONS['UP']
-        elif keys[pygame.K_DOWN] and self.snake.direction != Snake.DIRECTIONS['UP']:
-            self.snake.direction = Snake.DIRECTIONS['DOWN']
-        elif keys[pygame.K_LEFT] and self.snake.direction != Snake.DIRECTIONS['RIGHT']:
-            self.snake.direction = Snake.DIRECTIONS['LEFT']
-        elif keys[pygame.K_RIGHT] and self.snake.direction != Snake.DIRECTIONS['LEFT']:
-            self.snake.direction = Snake.DIRECTIONS['RIGHT']
+        if keys[pygame.K_UP] and self.snake.direction != Direction.DOWN.value:
+            self.snake.direction = Direction.UP.value
+        elif keys[pygame.K_DOWN] and self.snake.direction != Direction.UP.value:
+            self.snake.direction = Direction.DOWN.value
+        elif keys[pygame.K_LEFT] and self.snake.direction != Direction.RIGHT.value:
+            self.snake.direction = Direction.LEFT.value
+        elif keys[pygame.K_RIGHT] and self.snake.direction != Direction.LEFT.value:
+            self.snake.direction = Direction.RIGHT.value
 
     def step(self):
         self.handle_input()
