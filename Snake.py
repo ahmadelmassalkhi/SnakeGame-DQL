@@ -1,15 +1,19 @@
 import pygame
 from Map import Map
-from Apple import Apple
-
+import random
 
 class Snake:
-    directions = [(0, -1), (1, 0), (0, 1), (-1, 0)] # up, right, down, left
+    DIRECTIONS = {
+            'UP': (0, -1),
+            'DOWN': (0, 1),
+            'LEFT': (-1, 0),
+            'RIGHT': (1, 0)
+        }
 
     def __init__(self, map:Map):
         self.map = map
         self.body = [(map.width//2, map.height//2)]
-        self.direction = Snake.directions[1]  # Start moving to the right
+        self.direction = random.choice(list(Snake.DIRECTIONS.values()))  # Start moving in a random direction
         self.vision_grid = [[0 for _ in range(self.map.width)] for _ in range(self.map.height)]
 
     def move(self):
@@ -33,27 +37,3 @@ class Snake:
         for segment in self.body:
             rect = pygame.Rect(segment[0] * self.map.TILE_SIZE, segment[1] * self.map.TILE_SIZE, self.map.TILE_SIZE, self.map.TILE_SIZE)
             pygame.draw.rect(self.map.screen, (0, 255, 0), rect)
-
-    def update_vision(self, apple: Apple):
-        """
-        Update the vision grid with the current state of the map.
-        0 = empty, 1 = snake body, 2 = snake head, 3 = apple.
-        """
-        # Init/Reset the grid
-        self.vision_grid = [[0 for _ in range(self.map.width)] for _ in range(self.map.height)]
-
-        try:
-            # Mark the snake's head
-            head = self.body[0]
-            self.vision_grid[head[1]][head[0]] = 2
-
-            # Mark the snake's body
-            for segment in self.body[1:]:
-                self.vision_grid[segment[1]][segment[0]] = 1  # Body
-
-            # Mark the apple
-            apple_pos = apple.position
-            self.vision_grid[apple_pos[1]][apple_pos[0]] = 3
-        except Exception as e:
-            # incase of collision, head position is an invalid index
-            pass

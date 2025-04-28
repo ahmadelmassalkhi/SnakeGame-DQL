@@ -25,14 +25,14 @@ class Game:
 
     def handle_input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP] and self.snake.direction != (0, 1):
-            self.snake.direction = (0, -1)
-        elif keys[pygame.K_DOWN] and self.snake.direction != (0, -1):
-            self.snake.direction = (0, 1)
-        elif keys[pygame.K_LEFT] and self.snake.direction != (1, 0):
-            self.snake.direction = (-1, 0)
-        elif keys[pygame.K_RIGHT] and self.snake.direction != (-1, 0):
-            self.snake.direction = (1, 0)
+        if keys[pygame.K_UP] and self.snake.direction != Snake.DIRECTIONS['DOWN']:
+            self.snake.direction = Snake.DIRECTIONS['UP']
+        elif keys[pygame.K_DOWN] and self.snake.direction != Snake.DIRECTIONS['UP']:
+            self.snake.direction = Snake.DIRECTIONS['DOWN']
+        elif keys[pygame.K_LEFT] and self.snake.direction != Snake.DIRECTIONS['RIGHT']:
+            self.snake.direction = Snake.DIRECTIONS['LEFT']
+        elif keys[pygame.K_RIGHT] and self.snake.direction != Snake.DIRECTIONS['LEFT']:
+            self.snake.direction = Snake.DIRECTIONS['RIGHT']
 
     def draw(self):
         self.map.draw()
@@ -42,7 +42,6 @@ class Game:
 
     def update(self):
         self.snake.move()
-        self.snake.update_vision(self.apple)
         
         ''' CHECK COLLISION '''
         if self.snake.check_collision():
