@@ -27,9 +27,9 @@ class Snake:
             return False
 
         # Update map grid
-        self.map.grid[new_head] = Tile.SNAKE_HEAD.value # new head
-        self.map.grid[head] = Tile.SNAKE_BODY.value # is now a body segment
-        self.map.grid[tail] = Tile.EMPTY.value # is now empty
+        self.map.grid[new_head[1]][new_head[0]] = Tile.SNAKE_HEAD.value # new head
+        self.map.grid[head[1]][head[0]] = Tile.SNAKE_BODY.value # is now a body segment
+        self.map.grid[tail[1]][tail[0]] = Tile.EMPTY.value # is now empty
         return True
     
     def grow(self):

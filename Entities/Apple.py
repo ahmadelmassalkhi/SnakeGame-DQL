@@ -13,14 +13,14 @@ class Apple:
             Relocates the apple to a random empty tile on the map.
         '''
         # Ensure the apple does not spawn on the snake
-        empty_tiles = [tile for tile in self.map.grid if self.map.grid[tile] == Tile.EMPTY.value]
+        empty_tiles = [(x,y) for y in range(len(self.map.grid)) for x in range(len(self.map.grid[y])) if self.map.grid[y][x] == Tile.EMPTY.value]
         if not empty_tiles:
             return False  # No empty tiles available
         
         # Randomly select an empty tile
         self.position = random.choice(empty_tiles) 
         # Mark the tile as occupied by an apple
-        self.map.grid[self.position] = Tile.APPLE.value
+        self.map.grid[self.position[1]][self.position[0]] = Tile.APPLE.value
 
         # Found and Occupied an empty tile
         return True
