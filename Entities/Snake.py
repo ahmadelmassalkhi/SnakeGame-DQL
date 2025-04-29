@@ -12,18 +12,26 @@ class Snake:
         self.direction = random.choice(list(Direction)).value
 
     def move(self, direction:Direction = None):
+        # Change direction if a new one is provided
         if direction:
             self.direction = direction.value
+
+        # Move one square in the current direction
         head = self.body[0]
         new_head = (head[0] + self.direction[0], head[1] + self.direction[1])
         self.body.insert(0, new_head)
         tail = self.body.pop()
 
+        # Check if the move was valid
+        if self.check_collision():
+            return False
+
         # Update map grid
         self.map.grid[new_head] = Tile.SNAKE_HEAD.value # new head
         self.map.grid[head] = Tile.SNAKE_BODY.value # is now a body segment
         self.map.grid[tail] = Tile.EMPTY.value # is now empty
-
+        return True
+    
     def grow(self):
         self.body.append(self.body[-1])
 

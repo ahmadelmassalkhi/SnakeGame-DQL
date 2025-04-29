@@ -22,15 +22,11 @@ class PlayerGame(Game):
 
     @override
     def step(self, direction:Direction = None):
-        self.snake.move(direction)
-        
         ''' CHECK COLLISION '''
-        if self.snake.check_collision():
+        if not self.snake.move(direction):
             self.reset()
 
         ''' EAT APPLE '''
-        # this logic must be AFTER the collision check
-        # or else, eating first apple results in self-collision (head in body) 
         if self.snake.get_head_pos() == self.apple.get_pos():
             self.score += 1
             self.snake.grow()
