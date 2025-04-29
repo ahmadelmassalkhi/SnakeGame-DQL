@@ -31,7 +31,7 @@ class PlayerGame(Game):
         ''' EAT APPLE '''
         # this logic must be AFTER the collision check
         # or else, eating first apple results in self-collision (head in body) 
-        if self.snake.body[0] == self.apple.position:
+        if self.snake.get_head_pos() == self.apple.get_pos():
             self.score += 1
             self.snake.grow()
             self.apple.relocate()

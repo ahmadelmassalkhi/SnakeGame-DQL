@@ -34,6 +34,10 @@ class Snake:
             head[0] >= self.map.width or head[1] >= self.map.height or
             head in self.body[1:]
         )
+    
+    def get_head_pos(self):
+        """ returns tuple of (x,y) coordinates of the snake's head """
+        return self.body[0]
 
     def draw(self):
         for segment in self.body:

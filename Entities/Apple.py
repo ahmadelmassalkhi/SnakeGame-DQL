@@ -24,6 +24,10 @@ class Apple:
 
         # Found and Occupied an empty tile
         return True
+    
+    def get_pos(self):
+        """ returns tuple (x,y) coordinates of the apple """
+        return self.position
 
     def draw(self):
         rect = pygame.Rect(self.position[0] * self.map.TILE_SIZE, self.position[1] * self.map.TILE_SIZE, self.map.TILE_SIZE, self.map.TILE_SIZE)
