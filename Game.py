@@ -32,7 +32,7 @@ class Game:
         pygame.display.flip()
 
     @abstractmethod
-    def snake_direction(self):
+    def generate_action(self):
         pass
 
     @abstractmethod
@@ -44,7 +44,7 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-            self.step(self.snake_direction()) # update game state
+            self.step(self.generate_action()) # update game state
             self.draw()
             self.clock.tick(self.fps)
         pygame.quit()

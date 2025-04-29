@@ -8,7 +8,7 @@ class PlayerGame(Game):
         super().__init__(width, height, fps)
 
     @override
-    def snake_direction(self):
+    def generate_action(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP] and self.snake.direction != Direction.DOWN.value:
             return Direction.UP
