@@ -35,9 +35,10 @@ class PlayerGame(Game):
             # remove apple
             del self.apples[self.snake.get_head_pos()]
             # re-fill if last apple eaten
-            if len(self.apples) == 0:
-                self.spawn_apples()
-
+            if len(self.apples) == 0 and not self.spawn_apples():
+                print("YOU WIN! WHAT A LEGEND!")
+                pygame.quit()
+                exit()
 
 
 # Run the game
