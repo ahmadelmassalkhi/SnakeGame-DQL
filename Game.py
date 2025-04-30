@@ -23,15 +23,23 @@ class Game:
         self.reset()
 
     def spawn_apples(self):
+        """
+            Respawns apples on the map.
+            Returns True if at least one apple was spawned.
+            Else False
+        """
         # respawn apples
         self.apples = {} # reset
-        for _ in range(self.nbOfApples):
+        for i in range(self.nbOfApples):
             # create apple
             apple = Apple(map=self.map)
-            apple.relocate()
+            if not apple.relocate():
+                if i==0: return False
+                break
             # store apple
             self.apples[apple.get_pos()] = apple
-
+        return True
+    
     def reset(self):
         self.score = 0
         self.map = Map(self.width, self.height)
