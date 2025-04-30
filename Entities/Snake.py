@@ -9,16 +9,16 @@ class Snake:
     def __init__(self, map:Map):
         self.map = map
         self.body = [(map.width//2, map.height//2)]
-        self.direction = random.choice(list(Direction)).value
+        self.direction = random.choice(list(Direction))
 
     def move(self, direction:Direction = None):
         # Change direction if a new one is provided
-        if direction:
-            self.direction = direction.value
+        if direction and direction != Direction.opposite(self.direction):
+            self.direction = direction
 
         # Move one square in the current direction
         head = self.body[0]
-        new_head = (head[0] + self.direction[0], head[1] + self.direction[1])
+        new_head = (head[0] + self.direction.value[0], head[1] + self.direction.value[1])
         self.body.insert(0, new_head)
         tail = self.body.pop()
 

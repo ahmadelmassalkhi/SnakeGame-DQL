@@ -18,3 +18,17 @@ class Direction(Enum):
             return cls.RIGHT
         else:
             raise ValueError(f"Invalid index: {index}. Must be between 0 and 3.")
+        
+
+    @classmethod
+    def opposite(cls, direction):
+        if direction == cls.UP:
+            return cls.DOWN
+        elif direction == cls.DOWN:
+            return cls.UP
+        elif direction == cls.LEFT:
+            return cls.RIGHT
+        elif direction == cls.RIGHT:
+            return cls.LEFT
+        else:
+            raise ValueError(f"Invalid direction: {direction}. Must be one of {list(cls)}.")

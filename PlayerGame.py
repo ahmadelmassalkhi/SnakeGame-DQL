@@ -10,14 +10,10 @@ class PlayerGame(Game):
     @override
     def generate_action(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_UP] and self.snake.direction != Direction.DOWN.value:
-            return Direction.UP
-        if keys[pygame.K_DOWN] and self.snake.direction != Direction.UP.value:
-            return Direction.DOWN
-        if keys[pygame.K_LEFT] and self.snake.direction != Direction.RIGHT.value:
-            return Direction.LEFT
-        if keys[pygame.K_RIGHT] and self.snake.direction != Direction.LEFT.value:
-            return Direction.RIGHT
+        if keys[pygame.K_UP]: return Direction.UP
+        if keys[pygame.K_DOWN]: return Direction.DOWN
+        if keys[pygame.K_LEFT]: return Direction.LEFT
+        if keys[pygame.K_RIGHT]: return Direction.RIGHT
         return None
 
     @override
