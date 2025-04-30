@@ -10,25 +10,38 @@ pygame.init()
 
 
 class Game:
-    def __init__(self, width, height, fps=10):
+    def __init__(self, width, height, fps=10, nbOfApples=1):
         # game settings
         self.fps = fps
         self.width, self.height = width, height
         self.clock = pygame.time.Clock()
         self.running = True
+
+        # game entities
+        self.apples = {}
+        self.nbOfApples = nbOfApples
         self.reset()
+
+    def spawn_apples(self):
+        # respawn apples
+        self.apples = {} # reset
+        for _ in range(self.nbOfApples):
+            # create apple
+            apple = Apple(map=self.map)
+            apple.relocate()
+            # store apple
+            self.apples[apple.get_pos()] = apple
 
     def reset(self):
         self.score = 0
         self.map = Map(self.width, self.height)
         self.snake = Snake(map=self.map)
-        self.apple = Apple(map=self.map)
-        self.apple.relocate()
+        self.spawn_apples()
 
     def draw(self):
         self.map.draw()
         self.snake.draw()
-        self.apple.draw()
+        for apple in self.apples.values(): apple.draw()
         pygame.display.flip()
 
     @abstractmethod

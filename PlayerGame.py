@@ -4,8 +4,8 @@ import pygame
 from Enums.Direction import Direction
 
 class PlayerGame(Game):
-    def __init__(self, width, height, fps=10):
-        super().__init__(width, height, fps)
+    def __init__(self, width, height, fps=10, nbOfApples=10):
+        super().__init__(width, height, fps, nbOfApples)
 
     @override
     def generate_action(self):
@@ -27,10 +27,16 @@ class PlayerGame(Game):
             self.reset()
 
         ''' EAT APPLE '''
-        if self.snake.get_head_pos() == self.apple.get_pos():
+        if self.snake.get_head_pos() in self.apples:
+            # increase score & snake size
             self.score += 1
             self.snake.grow()
-            self.apple.relocate()
+
+            # remove apple
+            del self.apples[self.snake.get_head_pos()]
+            # re-fill if last apple eaten
+            if len(self.apples) == 0:
+                self.spawn_apples()
 
 
 
