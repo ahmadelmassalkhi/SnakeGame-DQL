@@ -10,6 +10,7 @@ class Snake:
         self.map = map
         self.body = [(map.width//2, map.height//2)]
         self.direction = random.choice(list(Direction))
+        self.map.grid[self.body[0][1]][self.body[0][0]] = Tile.SNAKE_HEAD.value
 
     def move(self, direction:Direction = None):
         # Change direction if a new one is provided
