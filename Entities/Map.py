@@ -9,6 +9,12 @@ class Map:
         pygame.display.set_caption("Snake Game")
         self.grid = [[Tile.EMPTY.value for _ in range(self.width)] for _ in range(self.height)]
 
+    def print_grid(self):
+        for row in self.grid:
+            print(row)
+        print()
+        print()
+
     def draw(self, color=(0, 0, 0)):
         self.screen.fill(color)
         for x in range(0, self.width * self.TILE_SIZE, self.TILE_SIZE):
